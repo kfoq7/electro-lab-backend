@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS= [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+LOCAL_APPS = [
+    'lab_user',
+]
+
+THIRDS_APPS = [
+    'rest_framework',
+    'rest_framework.authtoken',
+]
+
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRDS_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,6 +82,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'shinchlabbackend.wsgi.application'
+
+AUTH_USER_MODEL = 'lab_user.usercustom'
 
 
 # Database
@@ -131,3 +144,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
