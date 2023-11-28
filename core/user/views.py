@@ -1,9 +1,9 @@
 from rest_framework import viewsets
-from lab_user.models import UserCustom
-from lab_user.serializers import UserListSeralizer
+from .models import User
+from .serializers import UserListSeralizer
 
 
 class UserListAPIView(viewsets.ModelViewSet):
     
-    queryset = UserCustom.objects.all()
+    queryset = User.objects.all()
     serializer_class = UserListSeralizer

@@ -17,14 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from lab_user.views import UserListAPIView
+from core.user.views import UserListAPIView
 
 router = DefaultRouter()
 router.register(r'user', UserListAPIView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/', include('rest_framework.urls')),
+    path('api/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     # path('api/user', UserListAPIView.as_view({'get': 'list'}))
 ]

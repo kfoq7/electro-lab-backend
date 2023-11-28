@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from lab_user.models import UserCustom
+from .models import User
 
 
 class UserListSeralizer(serializers.ModelSerializer):
@@ -7,5 +7,5 @@ class UserListSeralizer(serializers.ModelSerializer):
     profile = serializers.CharField(source='get_profile_display')
     
     class Meta:
-        model = UserCustom
+        model = User
         fields = '__all__'

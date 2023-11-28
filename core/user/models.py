@@ -4,19 +4,19 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, username=None, password=None, **extra_fields):
-        if not username or not password:
+    def create_user(self, email=None, password=None, **extra_fields):
+        if not email or not password:
             raise ValueError('Please fill the fields.')
     
-        user = self.model(username,**extra_fields)
+        user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save()
         
         return user
 
-    def create_superuser(self, username, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, **extra_fields):
         user = self.create_user(
-            username=username,
+            email=email,
             password=password,
             **extra_fields
         )
@@ -27,9 +27,9 @@ class UserManager(BaseUserManager):
         return user
 
 
-class UserCustom(AbstractBaseUser):
+class User(AbstractBaseUser):
 
-    username = models.CharField(max_length=100, unique=True)
+    username = None
     email = models.CharField(max_length=100, unique=True)
     name = models.CharField('Name', max_length=100, blank=True)
     last_name = models.CharField('Last name', max_length=100, blank=True)
@@ -44,8 +44,7 @@ class UserCustom(AbstractBaseUser):
     ]
     profile = models.CharField(max_length=1, choices=PROFILES)
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['name','last_name']
+    USERNAME_FIELD = 'email'
 
     def __str__(self):
         return f'{self.username}'
