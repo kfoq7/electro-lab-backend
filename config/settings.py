@@ -44,6 +44,8 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     'core.user',
+    'core.managament',
+    'core.entities',
 ]
 
 THIRDS_APPS = [
