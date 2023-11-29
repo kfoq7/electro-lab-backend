@@ -10,7 +10,6 @@ class Product(models.Model):
     unique_stock = models.BigIntegerField()
     
 
-
 class Inventory(models.Model):
     
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)

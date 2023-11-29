@@ -17,7 +17,6 @@ class Employee(models.Model):
 class Supplier(models.Model):
     
     company_name = models.CharField(max_length=100)
-    user = models.OneToOneField(User, related_name='supplier', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.company_name

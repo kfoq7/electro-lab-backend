@@ -103,7 +103,7 @@ DATABASES = {
             'river': 'ODBC Driver 17 for SQL Server'
         }
     }
-}
+} 
 
 
 # Password validation
