@@ -22,5 +22,6 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('core.user.urls')),
-    # path('api/user', UserListAPIView.as_view({'get': 'list'}))
+    path('api/entities/', include('core.entities.urls')),
+    path('api/managament/', include('core.managament.urls')),
 ]

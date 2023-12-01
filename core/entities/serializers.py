@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from core.user.models import User
-from entities.models import Employee
+from core.entities.models import Employee, Supplier
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,4 +17,11 @@ class EmployeeSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Employee
+        fields = '__all__'
+
+
+class SupplierSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Supplier
         fields = '__all__'

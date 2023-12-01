@@ -1,12 +1,12 @@
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, generics
 from rest_framework.response import Response
 
-from entities.models import Employee
-from serializers import EmployeeSerializer
+from core.entities.models import Employee, Supplier
+from core.entities.serializers import EmployeeSerializer, SupplierSerializer
 
 
 class EmployeeAPIViewSet(viewsets.ModelViewSet):
-    
+
     model = Employee
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
@@ -22,3 +22,10 @@ class EmployeeAPIViewSet(viewsets.ModelViewSet):
             'msg': 'Employee created successfully',
             'data': employee_serializer.data
         }, status=status.HTTP_201_CREATED)
+
+
+class SupplierListCreateAPIView(generics.ListCreateAPIView):
+
+    model = Supplier
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer

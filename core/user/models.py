@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
 
-    username = None
+    username = models.CharField(max_length=100, null=True, blank=True)
     email = models.CharField(max_length=100, unique=True)
     name = models.CharField('Name', max_length=100, blank=True)
     last_name = models.CharField('Last name', max_length=100, blank=True)
@@ -37,10 +37,9 @@ class User(AbstractBaseUser):
     isAdmin = models.BooleanField(default=False)
     objects = UserManager()
     PROFILES = [
-        ('1', 'administrador'),
-        ('2', 'operador'),
-        ('3', 'inspector'),
-        ('4', 'cliente')
+        ('1', 'administrator'),
+        ('2', 'employee'),
+        ('3', 'student')
     ]
     profile = models.CharField(max_length=1, choices=PROFILES)
 
@@ -49,7 +48,7 @@ class User(AbstractBaseUser):
     def __str__(self):
         return f'{self.username}'
 
-    def has_perm(self, perm, obj=None):
+    def has_perms(self, perm, obj=None):
         return True
 
     def has_module_perms(self, app_label):
