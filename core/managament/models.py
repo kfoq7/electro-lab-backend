@@ -10,7 +10,6 @@ class Product(models.Model):
     unique_stock = models.BigIntegerField()
     
 
-
 class Inventory(models.Model):
     
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
@@ -23,3 +22,4 @@ class InventoryDetail(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     delivery_day = models.DateField()
     total_products = models.BigIntegerField()
+    description = models.TextField(max_length=255, null=True, blank=True)

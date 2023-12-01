@@ -6,6 +6,6 @@ from core.managament.views import ProductAPIViewSet
 
 
 router = DefaultRouter()
-router.register(r'product', ProductAPIViewSet)
+router.register('product', ProductAPIViewSet)
 
 urlpatterns = router.urls
