@@ -1,10 +1,19 @@
 from rest_framework import serializers
 
-from core.managament.models import Product
+from core.managament.models import Product, Inventory
 
 
 class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
+        fields = '__all__'
+
+
+class InventorySerializer(serializers.ModelSerializer):
+
+    products = ProductSerializer(many=True)
+
+    class Meta:
+        model = Inventory
         fields = '__all__'

@@ -4,9 +4,7 @@ from core.user.models import User
 
 
 class Employee(models.Model):
-    
-    name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+
     salary = models.DecimalField(max_digits=20, decimal_places=2)
     user = models.OneToOneField(User, related_name='employee', on_delete=models.CASCADE)
     

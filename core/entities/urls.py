@@ -1,10 +1,16 @@
-from django.urls import path
+from django.urls import path, include
 
-from core.entities.views import SupplierListCreateAPIView
+from rest_framework.routers import DefaultRouter
+
+from core.entities.views import SupplierListCreateAPIView, EmployeeAPIViewSet
 
 
-supplier_list = SupplierListCreateAPIView.as_view()
+router = DefaultRouter()
+router.register('employee', EmployeeAPIViewSet)
+
+supplier_list_create = SupplierListCreateAPIView.as_view()
 
 urlpatterns = [
-    path('supplier/', supplier_list, name='supplier-list')
+    path('supplier/', supplier_list_create, name='supplier-list-create'),
+    path('', include(router.urls)),
 ]
