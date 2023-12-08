@@ -1,8 +1,12 @@
 from rest_framework import status, viewsets, generics
 from rest_framework.response import Response
 
-from core.entities.models import Employee, Supplier
-from core.entities.serializers import EmployeeSerializer, SupplierSerializer
+from core.entities.models import Employee, Supplier, Student
+from core.entities.serializers import (
+    EmployeeSerializer,
+    SupplierSerializer,
+    StudentSerializer
+)
 
 
 class EmployeeAPIViewSet(viewsets.ModelViewSet):
@@ -10,7 +14,7 @@ class EmployeeAPIViewSet(viewsets.ModelViewSet):
     model = Employee
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
-    
+
     def create(self, request, pk=None, *args, **kwargs):
         employee_serializer = self.get_serializer(data=request.data)
         if not employee_serializer.is_valid():
@@ -29,3 +33,13 @@ class SupplierListCreateAPIView(generics.ListCreateAPIView):
     model = Supplier
     queryset = Supplier.objects.all()
     serializer_class = SupplierSerializer
+
+
+class StudentAPIViewSet(viewsets.ModelViewSet):
+
+    model = Student
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        pass

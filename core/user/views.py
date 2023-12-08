@@ -7,7 +7,8 @@ from user.serializers import UserListSeralizer
 
 
 class UserListAPIView(viewsets.ModelViewSet):
-    
+
+    model = User
     queryset = User.objects.all()
     serializer_class = UserListSeralizer
 

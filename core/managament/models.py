@@ -13,7 +13,7 @@ class Product(models.Model):
 class Inventory(models.Model):
     
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, related_name='products', through='InventoryDetail')
+    products = models.ManyToManyField(Product, related_name='inventory_products', through='InventoryDetail')
 
 
 class InventoryDetail(models.Model):

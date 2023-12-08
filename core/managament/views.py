@@ -13,5 +13,11 @@ class ProductAPIViewSet(viewsets.ModelViewSet):
 
 class InventoryAPIViewSet(viewsets.ModelViewSet):
     
+    model = Inventory
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
+
+    def create(self, request, *args, **kwargs):
+        # serializer = ProductSerializer(data=request.data)
+        # serializer = ProductSerializer()
+        print(request.data)
