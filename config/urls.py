@@ -18,10 +18,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from core.user.views import Login
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('core.user.urls')),
     path('api/entities/', include('core.entities.urls')),
     path('api/managament/', include('core.managament.urls')),
+    # path('api/user/', include('core.user.'))
+    path('api/login/', Login.as_view(), name='login'),
 ]

@@ -2,11 +2,11 @@ from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 
-from user.models import User
-from user.serializers import UserListSeralizer
+from core.user.models import User
+from core.user.serializers import UserListSeralizer
 
 
-class UserListAPIView(viewsets.ModelViewSet):
+class UserAPIViewSet(viewsets.ModelViewSet):
 
     model = User
     queryset = User.objects.all()
@@ -15,7 +15,8 @@ class UserListAPIView(viewsets.ModelViewSet):
 
 class Login(ObtainAuthToken):
     
-    def post(self, request, *args, kwargs):
+    def post(self, request, *args, **kwargs):
+        print(request.data)
         login_serializer = self.serializer_class(data=request.data, context={'request': request})
         if not login_serializer.is_valid():
             return Response({

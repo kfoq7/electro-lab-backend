@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-    def create(self, validated_data):
+    def create(validated_data):
         user = User(**validated_data)
         user.set_password(validated_data['password'])
         user.save()
@@ -43,8 +43,15 @@ class SupplierSerializer(serializers.ModelSerializer):
 
 class StudentSerializer(serializers.ModelSerializer):
 
-    products = ProductSerializer(many=True)
+    user = UserSerializer()
 
     class Meta:
         model = Student
-        fields = '__all__'
+        fields = ['id', 'code_student', 'user']
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
+        user_instance = User.objects.create(**user_data)
+
+        student_instance = Student.objects.create(user=user_instance, **validated_data)
+        return student_instance

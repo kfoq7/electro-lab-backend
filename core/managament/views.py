@@ -2,7 +2,11 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 from core.managament.models import Product, Inventory
-from core.managament.serializers import ProductSerializer, InventorySerializer
+from core.managament.serializers import (
+    ProductSerializer,
+    InventorySerializer,
+)
+
 
 
 class ProductAPIViewSet(viewsets.ModelViewSet):
@@ -17,7 +21,22 @@ class InventoryAPIViewSet(viewsets.ModelViewSet):
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
 
-    def create(self, request, *args, **kwargs):
-        # serializer = ProductSerializer(data=request.data)
-        # serializer = ProductSerializer()
-        print(request.data)
+    # def get_serializer_class(self):
+    #     if self.action == 'create':
+    #         return InventoryCreateSerializerClass
+
+    #     return InventorySerializer
+
+    # def create(self, request, *args, **kwargs):
+    #     serializer = InventoryCreateSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         inventory_detail = serializer.save()
+            
+    #         inventory, created = Inventory.objects.get_or_create(employee=request.user.employee)
+    #         if created:
+    #             inventory.save()
+
+    #         inventory.products.add(inventory_detail.product)
+
+    #         return Response(InventoryDetailSerializer(inventory_detail).data)
+    #     return Response(serializer.errors, status=400)
