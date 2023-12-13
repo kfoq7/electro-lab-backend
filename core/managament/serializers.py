@@ -42,7 +42,6 @@ class InventorySerializer(serializers.ModelSerializer):
         print(validated_data)
         products_data = validated_data.pop('products')
         inventory = Inventory.objects.create(**validated_data)
-        # print(product_data)
         for product_data in products_data:
             product = product_data.pop('product')
             inventory_detail = InventoryDetail.objects.create(invetory=inventory, product_id=product.id, **product_data)
