@@ -22,6 +22,6 @@ class Inventory(models.Model):
 
 class InventoryDetail(models.Model):
 
-    invetory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     description = models.TextField(max_length=255, null=True, blank=True)
