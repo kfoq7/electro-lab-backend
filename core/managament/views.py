@@ -6,6 +6,7 @@ from core.managament.serializers import (
     ProductSerializer,
     ProductCreateSerializer,
     InventorySerializer,
+    InventoryCreateSerializer,
 )
 
 
@@ -27,11 +28,11 @@ class InventoryAPIViewSet(viewsets.ModelViewSet):
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
 
-    # def get_serializer_class(self):
-    #     if self.action == 'create':
-    #         return InventoryCreateSerializerClass
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return InventoryCreateSerializer
 
-    #     return InventorySerializer
+        return InventorySerializer
 
     # def create(self, request, *args, **kwargs):
     #     serializer = InventoryCreateSerializer(data=request.data)
