@@ -17,11 +17,20 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ('name_product', 'unique_stock', 'supplier', )
+
+
+class ProductCreateSerializer(serializers.ModelSerializer):
+
+    supplier = serializers.PrimaryKeyRelatedField(queryset=Supplier.objects.all()) 
+
+    class Meta:
+        model = Product
+        fields = ('name_product', 'unique_stock', 'supplier', )
 
 
 class InventoryDetailSerializer(serializers.HyperlinkedModelSerializer):
-    
+
     id = serializers.IntegerField(source='product.id')
     name_product =  serializers.ReadOnlyField(source='product.name_product')
     description = serializers.ReadOnlyField()
@@ -40,12 +49,10 @@ class InventorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        print(validated_data)
-        products_data = validated_data.pop('products')
-        print(products_data)
-        # inventory = Inventory.objects.create(**validated_data)
-        # for product_data in products_data:
-            # product = product_data.pop('product')
-            # inventory_detail = InventoryDetail.objects.create(invetory=inventory, product_id=product.id, **product_data)
-            # inventory.products.add(inventory_detail.product)
-        # return inventory
+        products_id = validated_data.pop('products', [])
+        inventory = Inventory.objects.create(**validated_data)
+        for key, value in products_id:
+            product_id = value.get('id')
+            inventory_detail = InventoryDetail.objects.create(invetory=inventory, product_id=product.id, )
+            inventory.products.add(inventory_detail.product)
+        return inventory

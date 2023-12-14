@@ -4,15 +4,21 @@ from rest_framework.response import Response
 from core.managament.models import Product, Inventory
 from core.managament.serializers import (
     ProductSerializer,
+    ProductCreateSerializer,
     InventorySerializer,
 )
-
 
 
 class ProductAPIViewSet(viewsets.ModelViewSet):
 
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return ProductCreateSerializer
+
+        return ProductSerializer
 
 
 class InventoryAPIViewSet(viewsets.ModelViewSet):
